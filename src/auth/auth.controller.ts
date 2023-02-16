@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { IsPublic } from './decorators/is-public.decorator';
 import { LocalAuthGuard } from './Guards/local-auth.guards';
 import { AuthRequest } from './Models/AuthRequest';
 
@@ -14,12 +15,11 @@ import { AuthRequest } from './Models/AuthRequest';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @IsPublic()
   @Post()
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
   authenticate(@Request() req: AuthRequest) {
-    console.log(req.user);
-
     return this.authService.login(req.user);
   }
 }

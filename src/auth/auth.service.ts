@@ -5,6 +5,7 @@ import { User } from 'src/users/entities/User';
 import { JwtUserPayload } from './Models/JwtUserPayload';
 import { JwtService } from '@nestjs/jwt';
 import { UserToken } from './Models/UserToken';
+import { UnauthorizedError } from './errors/unauthorized.error';
 
 @Injectable()
 export class AuthService {
@@ -41,6 +42,6 @@ export class AuthService {
       }
     }
 
-    throw new Error('Email or password provided is incorrect');
+    throw new UnauthorizedError('Email or password provided is incorrect');
   }
 }
