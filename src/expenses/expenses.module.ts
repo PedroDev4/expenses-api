@@ -4,10 +4,11 @@ import { ExpensesController } from './expenses.controller';
 import { ExpensesRepository } from './Infrastructure/Repositories/expenses.repository';
 import { UsersModule } from 'src/users/users.module';
 import { ExpensesAppService } from './Application/expenses.appservice';
+import { ProvidersModule } from 'src/providers/providers.module';
 
 @Module({
+  imports: [UsersModule, ProvidersModule],
   controllers: [ExpensesController],
   providers: [ExpensesService, ExpensesRepository, ExpensesAppService],
-  imports: [UsersModule],
 })
 export class ExpensesModule {}

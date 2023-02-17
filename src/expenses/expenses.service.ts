@@ -8,15 +8,15 @@ import { ExpensesRepository } from './Infrastructure/Repositories/expenses.repos
 export class ExpensesService {
   constructor(private readonly expensesRepository: ExpensesRepository) {}
 
-  async create({
-    description,
-    expenseDate,
-    userId,
-    value,
-  }: CreateExpenseDto): Promise<void> {
+  async create(
+    userId: string,
+    { description, expenseDate, value }: CreateExpenseDto,
+  ): Promise<void> {
+    console.log('entrei no servico0');
+
     await this.expensesRepository.create({
       description,
-      expenseDate,
+      expenseDate: new Date(expenseDate),
       userId,
       value,
     });
@@ -29,12 +29,13 @@ export class ExpensesService {
 
   async update(
     id: string,
-    { description, expenseDate, userId, value }: UpdateExpenseDto,
+    userId: string,
+    { description, expenseDate, value }: UpdateExpenseDto,
   ): Promise<void> {
     await this.expensesRepository.update({
       id,
       description,
-      expenseDate,
+      expenseDate: new Date(expenseDate),
       userId,
       value,
     });

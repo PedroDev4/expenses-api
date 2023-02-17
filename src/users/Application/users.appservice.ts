@@ -22,6 +22,7 @@ export class UsersAppService {
   }
 
   async findOne(id: string): Promise<User> {
+    console.log('Entrei no UsrAppService')  ;
     return await this.usersService.findOne(id);
   }
 

@@ -5,9 +5,8 @@ export class CreateExpenseDto {
   @IsString()
   description: string;
 
-  expenseDate: Date;
+  expenseDate: string;
 
   @IsPositive()
   value: number;
-  userId: string;
 }

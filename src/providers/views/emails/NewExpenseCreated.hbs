@@ -1,0 +1,33 @@
+<style> 
+    .container {
+        width: 800px;
+        font-family: Arial, Helvetica, sans-serif;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid;
+        border-radius: 10px;
+        border-color: blueviolet;
+        box-shadow: 5px 5px 4px;
+    }
+    span {
+        margin: 10px
+    }
+</style>
+
+<div class="container"> 
+
+    <span> Olá, {{username}}! </span>
+    <br>
+
+    <span> Você cadastrou uma nova despesa, segue os detalhes: </span>
+
+    <span> Data: {{expenseDate}} </span>
+    <span> Descrição: {{description}} </span>
+    <span> Valor: {{value}} </span>
+
+    <strong> <ins> Obrigado </ins>! </strong>
+
+    <h3> <strong> Equipe | <strong> OnflyExpenses </strong> </h3>  
+
+</div>

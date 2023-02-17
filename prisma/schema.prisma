@@ -23,7 +23,7 @@ model User {
 model Expenses {
   id          String   @id @default(uuid())
   description String?
-  expenseDate  DateTime @default(now())
+  expenseDate DateTime @default(now())
   value       Int      @db.Integer
 
   User   User?  @relation(fields: [userId], references: [id])

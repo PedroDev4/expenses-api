@@ -9,7 +9,7 @@ export const prisma = new PrismaClient();
 @Injectable()
 class UserRepository implements IUserRepository {
   
-  async create({ email, expenses, password, username }: User): Promise<void> {
+  async create({ email, expenses = [], password, username }: User): Promise<void> {
     await prisma.user.create({
       data: {
         email,
@@ -17,7 +17,7 @@ class UserRepository implements IUserRepository {
         password,
         expenses: {
           createMany: {
-            data: expenses,
+            data: expenses
           },
         },
       },

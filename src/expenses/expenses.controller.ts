@@ -18,8 +18,11 @@ export class ExpensesController {
   constructor(private readonly expensesAppService: ExpensesAppService) {}
 
   @Post()
-  create(@Body() createExpenseDto: CreateExpenseDto) {
-    return this.expensesAppService.create(createExpenseDto);
+  create(
+    @Body() createExpenseDto: CreateExpenseDto,
+    @CurrentUser() user: User,
+  ) {
+    return this.expensesAppService.create(user.id, createExpenseDto);
   }
 
   @Get()
@@ -33,11 +36,10 @@ export class ExpensesController {
     @CurrentUser() user: User,
     @Body() { description, expenseDate, value }: UpdateExpenseDto,
   ) {
-    return this.expensesAppService.update(id, {
+    return this.expensesAppService.update(id, user.id, {
       description,
       expenseDate,
       value,
-      userId: user.id,
     });
   }
 
