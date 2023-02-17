@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) Aplicação de gastos em Nest.js com sistema de autenticação jwt.
+
+Para executar a aplicação é necessário um container docker com a imagem *Postgres*, após isso basta substituir as credenciais no arquivo .env, seguindo o exemplo do arquivo .env-example
 
 ## Installation
 
