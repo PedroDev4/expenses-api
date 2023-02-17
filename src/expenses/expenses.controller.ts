@@ -3,40 +3,46 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
-import { ExpensesService } from './expenses.service';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
+import { ExpensesAppService } from './Application/expenses.appservice';
+import { User } from 'src/users/entities/User';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 
 @Controller('expenses')
 export class ExpensesController {
-  constructor(private readonly expensesService: ExpensesService) {}
+  constructor(private readonly expensesAppService: ExpensesAppService) {}
 
   @Post()
   create(@Body() createExpenseDto: CreateExpenseDto) {
-    return this.expensesService.create(createExpenseDto);
+    return this.expensesAppService.create(createExpenseDto);
   }
 
   @Get()
-  findAll() {
-    return this.expensesService.findAll();
+  findAll(@CurrentUser() user: User) {
+    return this.expensesAppService.getAllUserExpenses(user.id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.expensesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExpenseDto: UpdateExpenseDto) {
-    return this.expensesService.update(id, updateExpenseDto);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @CurrentUser() user: User,
+    @Body() { description, expenseDate, value }: UpdateExpenseDto,
+  ) {
+    return this.expensesAppService.update(id, {
+      description,
+      expenseDate,
+      value,
+      userId: user.id,
+    });
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.expensesService.remove(id);
+    return this.expensesAppService.delete(id);
   }
 }
